@@ -1,0 +1,96 @@
+<div class="flex items-center justify-center mt-8 ">
+  <input type="text" placeholder="Buscar Trabajos..."
+    class="border w-2/4  pt-4 pb-4 border-gray-300 px-4 py-2 rounded-md mr-2">
+  <button class="bg-blue-500  p-4 text-white rounded-md"><fa-icon [icon]="faSearch"></fa-icon></button>
+  <select class="border border-gray-300  pt-4 pb-4 rounded-md ml-2">
+    <option value="" disabled selected>Filtro...</option>
+    <option value="1">Filtro 1</option>
+    <option value="2">Filtro 2</option>
+    <option value="3">Filtro 3</option>
+  </select>
+  <button *ngIf="this.authService.isRecruiter()" class="bg-blue-500  p-4 text-white rounded-md ml-2">Crear Publicacion</button>
+</div>
+
+<h1 class="text-3xl font-bold text-left ml-72 mt-8">Trabajos Destacados</h1>
+
+<ng-template *ngIf="publicaciones.length == 0">
+
+  <div class="flex justify-center mt-8">
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold">¡Lo sentimos!</strong>
+      <span class="block sm:inline">No hay trabajos destacados en este momento.</span>
+    </div>
+  </div>
+
+</ng-template>
+
+<div class="flex justify-center mt-8">
+  <div class="overflow-x-auto whitespace-nowrap">
+    <div class="inline-flex space-x-4">
+      <div class="max-w-xs rounded overflow-hidden shadow-lg" *ngFor="let publicacion of publicaciones">
+        <ng-template *ngIf="publicacion.imagenes && publicacion.imagenes.length > 0">
+          <img class="w-full" src="{{publicacion.imagenes[0]}}" alt="imagen1">
+        </ng-template>
+        <div class="px-6 py-4" >
+          <div class="font-bold text-xl mb-2">{{publicacion.titulo}}</div>
+          <p class="text-gray-700 text-base">{{publicacion.contenido}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.authService.isRecruiter()">
+
+  <h1 class="text-3xl font-bold text-left ml-72 mt-8">Mis Publicaciones</h1>
+
+  <div class="flex justify-center mt-8">
+    <div class="overflow-x-auto whitespace-nowrap">
+      <div class="inline-flex space-x-4">
+        <div class="max-w-xs rounded overflow-hidden shadow-lg" *ngFor="let publicacion of publicaciones">
+          <ng-template *ngIf="publicacion.imagenes && publicacion.imagenes.length > 0">
+            <img class="w-full" src="{{publicacion.imagenes[0]}}" alt="imagen1">
+          </ng-template>
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{publicacion.titulo}}</div>
+            <p class="text-gray-700 text-base">{{publicacion.contenido}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--
+<h1 class="text-3xl font-bold text-left ml-72 mt-8">Categorias</h1>
+
+<div class="flex justify-center mt-8">
+
+  <div class="overflow-x-auto whitespace-nowrap">
+    <div class="inline-flex space-x-4">
+      <div class="max-w-xs rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="imagen1.jpg" alt="imagen1">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Título 1</div>
+          <p class="text-gray-700 text-base">Descripción 1</p>
+        </div>
+      </div>
+      <div class="max-w-xs rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="imagen2.jpg" alt="imagen2">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Título 2</div>
+          <p class="text-gray-700 text-base">Descripción 2</p>
+        </div>
+      </div>
+      <div class="max-w-xs rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="imagen3.jpg" alt="imagen3">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Título 3</div>
+          <p class="text-gray-700 text-base">Descripción 3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->

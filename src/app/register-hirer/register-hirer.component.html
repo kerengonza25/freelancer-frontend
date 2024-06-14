@@ -1,0 +1,167 @@
+<div class="w-full h-screen bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/placeholder.svg')">
+  <div class="flex justify-center h-full">
+    <div class="mx-auto space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-2/5">
+      <div class="space-y-1 text-center">
+        <h1 class="text-3xl font-bold">Registro de Reclutador</h1>
+        <p class="text-gray-500 dark:text-gray-400">Complete el formulario para registrarse como reclutador en
+          Freelanceando</p>
+      </div>
+      <form class="lg:flex lg:space-x-4" [formGroup]="form" (ngSubmit)="register()">
+        <!-- Primera Columna -->
+        <div class="lg:w-1/2 lg:pr-2 space-y-6">
+          <div class="space-y-1">
+            <label for="nombre">Nombre</label>
+            <label
+              [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('nombre')?.valid && (form.get('nombre')?.touched || form.get('nombre')?.dirty),
+              'rounded-lg': !(!form.get('nombre')?.valid && (form.get('nombre')?.touched || form.get('nombre')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faUser"></fa-icon>
+              <input formControlName="nombre" type="text" class="grow" placeholder="Nombre" />
+            </label>
+            <span *ngIf="!form.get('nombre')?.valid && (form.get('nombre')?.touched || form.get('nombre')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{nombreErrorMessages()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="email">Email</label>
+            <label [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('email')?.valid && (form.get('email')?.touched || form.get('email')?.dirty),
+              'rounded-lg': !(!form.get('email')?.valid && (form.get('email')?.touched || form.get('email')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faEmail"></fa-icon>
+              <input formControlName="email" type="text" class="grow" placeholder="Email" />
+            </label>
+            <span *ngIf="!form.get('email')?.valid && (form.get('email')?.touched || form.get('email')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{emailErrorMessages()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="password">Contraseña</label>
+            <label
+              [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('password')?.valid && (form.get('password')?.touched || form.get('password')?.dirty),
+              'rounded-lg': !(!form.get('password')?.valid && (form.get('password')?.touched || form.get('password')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faLock"></fa-icon>
+              <input id="hs-toggle-password" formControlName="password" [type]="passwordType" class="grow"
+                placeholder="Contraseña" />
+              <button type="button" (click)="togglePasswordVisibility()">
+                <fa-icon *ngIf="passwordType === 'password'" [icon]="faView"></fa-icon>
+                <fa-icon *ngIf="passwordType === 'text'" [icon]="faNoview"></fa-icon>
+              </button>
+            </label>
+            <span *ngIf="!form.get('password')?.valid && (form.get('password')?.touched || form.get('password')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{passwordErrorMessages()}}</span>
+                </div>
+              </div>
+
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="confirm_password">Confirmar Contraseña</label>
+            <label
+              [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('confirmPassword')?.valid && (form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty),
+              'rounded-lg': !(!form.get('confirmPassword')?.valid && (form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faLock"></fa-icon>
+              <input id="hs-toggle-confirm-password" formControlName="confirmPassword" [type]="confirmPasswordType"
+                class="grow" placeholder="Confirmar Contraseña" />
+              <button type="button" (click)="toggleConfirmPasswordVisibility()">
+                <fa-icon *ngIf="confirmPasswordType === 'password'" [icon]="faView"></fa-icon>
+                <fa-icon *ngIf="confirmPasswordType === 'text'" [icon]="faNoview"></fa-icon>
+              </button>
+            </label>
+            <span
+              *ngIf="!form.get('confirmPassword')?.valid && (form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{confirmPasswordErrorMessages()}}</span>
+                </div>
+              </div>
+
+            </span>
+          </div>
+        </div>
+        <!-- Segunda Columna -->
+        <div class="lg:w-1/2 lg:pl-2 space-y-6">
+          <div class="space-y-1">
+            <label for="num_colaboradores">Número de Colaboradores Actual</label>
+            <label
+              [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('numColaboradores')?.valid && (form.get('numColaboradores')?.touched || form.get('numColaboradores')?.dirty),
+              'rounded-lg': !(!form.get('numColaboradores')?.valid && (form.get('numColaboradores')?.touched || form.get('numColaboradores')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faUsers"></fa-icon>
+              <input formControlName="numColaboradores" type="number" class="grow"
+                placeholder="Número de Colaboradores Actual" />
+            </label>
+            <span
+              *ngIf="!form.get('numColaboradores')?.valid && (form.get('numColaboradores')?.touched || form.get('numColaboradores')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{colabErrorMessages()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="web">Sitio Web (Opcional)</label>
+            <label class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faGlobe"></fa-icon>
+              <input formControlName="website" type="text" class="grow" placeholder="Sitio Web" />
+            </label>
+          </div>
+          <div class="space-y-1">
+            <label for="location">Localizacion (Opcional)</label>
+            <label class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faLocation"></fa-icon>
+              <input formControlName="location" type="text" class="grow" placeholder="location" />
+            </label>
+          </div>
+          <div class="space-y-1">
+            <label for="descripcion">Descripción</label>
+            <textarea
+              [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('descripcion')?.valid && (form.get('descripcion')?.touched || form.get('descripcion')?.dirty),
+              'rounded-lg': !(!form.get('descripcion')?.valid && (form.get('descripcion')?.touched || form.get('descripcion')?.dirty))}"
+              formControlName="descripcion"
+              class="textarea textarea-bordered textarea-sm w-full resize-none border rounded-md p-2" rows="3"
+              placeholder="Descripción">
+              </textarea>
+            <span
+              *ngIf="!form.get('descripcion')?.valid && (form.get('descripcion')?.touched || form.get('descripcion')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 mt-[-10px] border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{descripcionErrorMessage()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </form>
+      <!-- Botón de Registro -->
+      <button class="w-full btn btn-primary btn-active" [disabled]="!form.valid" (click)="register()" type="submit">Registrarse</button>
+      <div class="mt-4 text-center text-sm">
+        ¿Ya tienes una cuenta? Inicia sesión
+        <a class="underline" href="#">Login</a>
+      </div>
+    </div>
+  </div>

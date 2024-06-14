@@ -1,0 +1,60 @@
+<div class="navbar bg-base-100 max-h-2">
+  <div class="flex-1">
+    <a class="btn btn-ghost text-xl">Freelanceando</a>
+  </div>
+  <div class="flex-none">
+    <!--
+    <div class="dropdown dropdown-end">
+      <button class="btn btn-ghost btn-circle" [enterKeyHint]="'AAA'">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      </button>
+      <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+        <div class="card-body">
+          <span class="font-bold text-lg">8 Items</span>
+          <span class="text-info">Subtotal: $999</span>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-block">View cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+    <ul class="menu menu-horizontal px-1">
+      <li *ngIf="!isLogedIn" class="self-center"><a (click)="login()">Login</a></li>
+      <li *ngIf="!isLogedIn" class="self-center"><a (click)="register()">Registrate</a></li>
+      <li *ngIf="isLogedIn" class="self-center"><a><fa-icon [icon]="faMessages"></fa-icon></a></li>
+      <li *ngIf="isLogedIn" class="self-center"><a><fa-icon [icon]="faSearch"></fa-icon></a></li>
+      <li *ngIf="isLogedIn">
+        <details>
+          <summary>
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+              <div class="w-10 rounded-full">
+                <img alt="User"
+                  src="/assets/images/user-128-64.png" />
+              </div>
+            </div>
+          </summary>
+          <ul class="bg-base-100 !ms-[-50px] rounded-t-none mr-4 z-[1] p-2 shadow ">
+            <li><a><fa-icon [icon]="faUser"></fa-icon> Cuenta</a></li>
+            <li><a><fa-icon [icon]="faGear"></fa-icon> Configuración</a></li>
+            <li><a (click)="logout()"><fa-icon [icon]="faRightFromBracket"></fa-icon> Logout</a></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+    <!--
+    <div class="dropdown dropdown-end">
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a>Logout</a></li>
+      </ul>
+    </div>
+    -->
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="flex h-[calc(100vh-64px)]">
+  <div class="w-1/4 bg-gray-200 p-4">
+    <!-- Panel lateral con lista de mensajes seleccionables -->
+    <h2 class="text-lg font-bold">Conversaciones</h2>
+    <input type="text" class="border border-gray-300 rounded-md p-2 w-full mt-2" placeholder="Buscar conversación...">
+    <ul class="grid gap-2 mt-4">
+      <li class="p-2 cursor-pointer btn btn-disabled mt-1 ">Tú: ¡Hola! Estoy bien, ¿y tú?</li>
+      <li class="p-2 cursor-pointer btn mt-1 ">Usuario 2: Hola</li>
+      <li class="p-2 cursor-pointer btn mt-1 ">Usuario 3: Hola</li>
+      <!-- ... -->
+    </ul>
+  </div>
+  <div class="w-3/4 bg-white p-4">
+    <!-- Vista de la conversación entre el usuario actual y el otro usuario -->
+    <div class="flex flex-col h-full">
+      <div class="flex-1 overflow-y-auto">
+        <!-- Aquí se mostrarían los mensajes de la conversación -->
+        <div class="flex flex-col">
+          <div class="flex items-center">
+            <div class="bg-blue-500 text-white rounded-full p-2">Usuario A</div>
+            <div class="ml-2 bg-gray-200 p-2">Hola, ¿cómo estás?</div>
+          </div>
+          <div class="flex flex-row-reverse items-center mt-2">
+            <div class="bg-green-700 text-white rounded-full p-2"> Tú </div>
+            <div class="mr-2 bg-gray-200 p-2">¡Hola! Estoy bien, ¿y tú?</div>
+          </div>
+          <!-- ... -->
+        </div>
+      </div>
+      <div class="flex items-center mt-4">
+        <input type="text" class="flex-1 border mr-2 rounded-r-none rounded-l-lg border-gray-300 py-2 px-4"
+          placeholder="Escribe un mensaje...">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-lg">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>

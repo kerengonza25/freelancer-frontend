@@ -1,0 +1,107 @@
+<div class="container mx-auto">
+  <h1 class="text-2xl font-bold mb-4">User List</h1>
+
+  <table class="min-w-full bg-white border border-gray-300">
+    <thead>
+      <tr>
+        <th class="py-2 px-4 border-b">Nombre</th>
+        <th class="py-2 px-4 border-b">Correo electrónico</th>
+        <th class="py-2 px-4 border-b">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- User rows go here -->
+      <tr *ngFor="let user of users">
+        <td class="py-2 px-4 border-b">
+          {{ user.lastName }} {{ user.firstName }}
+        </td>
+        <td class="py-2 px-4 border-b">{{ user.email }}</td>
+        <td class="py-2 px-4 border-b">
+          <button (click)="editUserModal(user)"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            Editar
+          </button>
+          <button
+            (click)="deleteUser(user)"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination-controls
+    [maxSize]="pageSize"
+    [directionLinks]="true"
+    [autoHide]="false"
+    [responsive]="true"
+    [previousLabel]="'Anterior'"
+    [nextLabel]="'Siguiente'"
+    (pageChange)="onPageChange($event)"
+    (pageBoundsCorrection)="onPageChange($event)"
+  >
+  </pagination-controls>
+
+  <div class="flex justify-between mt-4">
+    <div class="flex items-center">
+      <button (click)="createUserModal()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Crear Nuevo Usuario
+      </button>
+    </div>
+  </div>
+
+  <!--
+  <app-pagination
+    #pagination
+    [collectionSize]="users.length"
+    [pageSize]="1"
+    [firstLastButtons]="true"
+    [maxSize]="2"
+    [small]="true"
+    (pageChange)="onPageChange2($event)"
+  ></app-pagination>
+
+  <div class="flex justify-center mt-4">
+    <ul class="flex list-reset border border-gray-300 rounded">
+      <li class="mr-2">
+        <a
+          class="block py-2 px-3 bg-white border-r border-gray-300 hover:bg-gray-200"
+          href="#"
+          >1</a
+        >
+      </li>
+      <li class="mr-2">
+        <a
+          class="block py-2 px-3 bg-white border-r border-gray-300 hover:bg-gray-200"
+          href="#"
+          >2</a
+        >
+      </li>
+      <li class="mr-2">
+        <a
+          class="block py-2 px-3 bg-white border-r border-gray-300 hover:bg-gray-200"
+          href="#"
+          >3</a
+        >
+      </li>
+      <li class="mr-2">
+        <a
+          class="block py-2 px-3 bg-white border-r border-gray-300 hover:bg-gray-200"
+          href="#"
+          >4</a
+        >
+      </li>
+      <li>
+        <a class="block py-2 px-3 bg-white hover:bg-gray-200" href="#"
+          >Siguiente</a
+        >
+      </li>
+    </ul>
+    </div>
+  -->
+</div>

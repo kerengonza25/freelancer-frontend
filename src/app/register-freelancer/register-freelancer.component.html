@@ -1,0 +1,158 @@
+<div class="w-full h-screen bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/placeholder.svg')">
+  <div class="flex justify-center h-full">
+    <div class="mx-auto space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-2/5">
+      <div class="space-y-1 text-center">
+        <h1 class="text-3xl font-bold">Registro</h1>
+        <p class="text-gray-500 dark:text-gray-400">Complete el formulario para registrarse en Freelanceando</p>
+      </div>
+      <form class="lg:flex lg:space-x-4" [formGroup]="form" (ngSubmit)="register()">
+        <!-- Primera Columna -->
+        <div class="lg:w-1/2 lg:pr-2 space-y-6">
+          <div class="space-y-1">
+            <label for="nombre">Nombre</label>
+            <label class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faUser"></fa-icon>
+              <input formControlName="firstName" type="text" class="grow" placeholder="Nombre" />
+            </label>
+            <span
+              *ngIf="!form.get('firstName')?.valid && (form.get('firstName')?.touched || form.get('firstName')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{firstNameErrorMessages()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="apellido">Apellido</label>
+            <label class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faUser"></fa-icon>
+              <input formControlName="lastName" type="text" class="grow" placeholder="Apellido" />
+            </label>
+            <span *ngIf="!form.get('lastName')?.valid && (form.get('lastName')?.touched || form.get('lastName')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{lastNameErrorMessages()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="email">Email</label>
+            <label [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('email')?.valid && (form.get('email')?.touched || form.get('email')?.dirty),
+              'rounded-lg': !(!form.get('email')?.valid && (form.get('email')?.touched || form.get('email')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faEmail"></fa-icon>
+              <input formControlName="email" type="text" class="grow" placeholder="Email" />
+            </label>
+            <span *ngIf="!form.get('email')?.valid && (form.get('email')?.touched || form.get('email')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{emailErrorMessages()}}</span>
+                </div>
+              </div>
+
+            </span>
+
+
+          </div>
+          <div class="space-y-1">
+            <label for="password">Contraseña</label>
+            <label
+              [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('password1')?.valid && (form.get('password1')?.touched || form.get('password1')?.dirty),
+              'rounded-lg': !(!form.get('password1')?.valid && (form.get('password1')?.touched || form.get('password1')?.dirty))}"
+              class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faLock"></fa-icon>
+              <input id="hs-toggle-password1" formControlName="password1" [type]="passWord1Type" class="grow"
+                placeholder="Contraseña" />
+              <button type="button" (click)="togglePassword1Visibility()">
+                <fa-icon *ngIf="passWord1Type === 'password'" [icon]="faView"></fa-icon>
+                <fa-icon *ngIf="passWord1Type === 'text'" [icon]="faNoview"></fa-icon>
+              </button>
+            </label>
+            <span
+              *ngIf="!form.get('password1')?.valid && (form.get('password1')?.touched || form.get('password1')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{passwordErrorMessages()}}</span>
+                </div>
+              </div>
+
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="confirm_password">Confirmar Contraseña</label>
+            <label [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('password2')?.valid && (form.get('password2')?.touched || form.get('password2')?.dirty),
+              'rounded-lg': !(!form.get('password2')?.valid && (form.get('password2')?.touched || form.get('password2')?.dirty))}" class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faLock"></fa-icon>
+              <input id="hs-toggle-password2" formControlName="password2" [type]="passWord2Type" class="grow"
+                placeholder="Confirmar Contraseña" />
+              <button type="button" (click)="togglePassword2Visibility()">
+                <fa-icon *ngIf="passWord2Type === 'password'" [icon]="faView"></fa-icon>
+                <fa-icon *ngIf="passWord2Type === 'text'" [icon]="faNoview"></fa-icon>
+              </button>
+            </label>
+            <span
+              *ngIf="!form.get('password2')?.valid && (form.get('password2')?.touched || form.get('password2')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{password2ErrorMessages()}}</span>
+                </div>
+              </div>
+
+            </span>
+          </div>
+        </div>
+        <!-- Segunda Columna -->
+        <div class="lg:w-1/2 lg:pl-2 space-y-6">
+          <div class="space-y-1">
+            <label for="skills">Skills</label>
+            <label class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faCode"></fa-icon>
+              <input formControlName="skills" type="text" class="grow" placeholder="Skills" />
+            </label>
+          </div>
+          <div class="space-y-1">
+            <label for="precio">Precio base por hora</label>
+            <label [ngClass]="{
+              'rounded-t-lg rounded-b-none': !form.get('price')?.valid && (form.get('price')?.touched || form.get('price')?.dirty),
+              'rounded-lg': !(!form.get('price')?.valid && (form.get('price')?.touched || form.get('price')?.dirty))}" class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faDollar"></fa-icon>
+              <input formControlName="price" class="grow" placeholder="Precio" currencyMask formControlName="price"
+                [options]="{ prefix: '$ ', thousands: '.', decimal: ',' }" />
+            </label>
+            <span *ngIf="!form.get('price')?.valid && (form.get('price')?.touched || form.get('price')?.dirty)"
+              class="help-block">
+              <div role="alert">
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <span>{{priceErrorMessages()}}</span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <label for="cv">CV (Opcional)</label>
+            <label class="input input-bordered flex items-center gap-2">
+              <fa-icon [icon]="faFile"></fa-icon>
+              <input type="file" class="grow" placeholder="Seleccione Un Documento" />
+            </label>
+          </div>
+        </div>
+      </form>
+      <!-- Botón de Registro -->
+      <button class="w-full btn btn-primary btn-active" [disabled]="!form.valid" (click)="register()" type="submit">Registrarse </button>
+      <div class="mt-4 text-center text-sm">
+        ¿Ya tienes una cuenta? Inicia sesión
+        <a class="underline" href="#">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
